@@ -1,0 +1,9 @@
+moviepy>=2.0.0
+requests
+google-api-python-client
+google-auth-oauthlib
+google-auth-httplib2
+pillow
+gTTS
+openai
+python-dotenv
