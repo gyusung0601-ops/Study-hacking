@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>몰입 - 나만의 공부 툴</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <h1>몰입<span class="dot">.</span></h1>
+    <div class="today" id="today-label"></div>
+  </header>
+
+  <main class="grid">
+
+    <!-- 타이머 -->
+    <section class="card timer-card">
+      <div class="mode-badge" id="mode-badge">집중</div>
+      <div class="timer" id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button id="btn-start" class="btn primary">시작</button>
+        <button id="btn-pause" class="btn" disabled>일시정지</button>
+        <button id="btn-reset" class="btn ghost">리셋</button>
+      </div>
+      <div class="timer-settings">
+        <label>집중(분)
+          <input type="number" id="input-focus" min="1" max="180" value="25">
+        </label>
+        <label>휴식(분)
+          <input type="number" id="input-break" min="1" max="60" value="5">
+        </label>
+        <label>긴 휴식(분)
+          <input type="number" id="input-long-break" min="1" max="90" value="15">
+        </label>
+      </div>
+      <div class="session-info">
+        오늘 완료한 뽀모도로: <strong id="session-count">0</strong>회
+        · 집중 시간: <strong id="session-minutes">0</strong>분
+      </div>
+    </section>
+
+    <!-- 집중 사운드 -->
+    <section class="card sound-card">
+      <h2>집중 사운드</h2>
+      <div class="sound-buttons">
+        <button class="sound-btn active" data-sound="none">끄기</button>
+        <button class="sound-btn" data-sound="white">화이트노이즈</button>
+        <button class="sound-btn" data-sound="pink">핑크노이즈</button>
+        <button class="sound-btn" data-sound="brown">브라운노이즈</button>
+      </div>
+      <label class="volume-row">
+        볼륨
+        <input type="range" id="volume" min="0" max="100" value="35">
+      </label>
+    </section>
+
+    <!-- 오늘의 목표 -->
+    <section class="card goal-card">
+      <h2>오늘의 학습목표</h2>
+      <textarea id="goal" placeholder="오늘 무엇을 이루고 싶나요?" rows="3"></textarea>
+    </section>
+
+    <!-- 할 일 체크리스트 -->
+    <section class="card todo-card">
+      <h2>할 일 (할당량)</h2>
+      <form id="todo-form" class="todo-form">
+        <input type="text" id="todo-input" placeholder="할 일을 입력하고 Enter" autocomplete="off">
+        <button type="submit" class="btn primary small">추가</button>
+      </form>
+      <ul id="todo-list" class="todo-list"></ul>
+      <div class="todo-progress" id="todo-progress"></div>
+    </section>
+
+    <!-- 연습장 -->
+    <section class="card notepad-card">
+      <h2>연습장</h2>
+      <textarea id="notepad" placeholder="자유롭게 메모하세요. 자동 저장됩니다." rows="8"></textarea>
+    </section>
+
+    <!-- 오늘의 피드백 -->
+    <section class="card feedback-card">
+      <h2>오늘의 피드백</h2>
+      <textarea id="feedback" placeholder="오늘 공부는 어땠나요? 잘한 점과 개선할 점을 적어보세요." rows="4"></textarea>
+    </section>
+
+    <!-- 통계 -->
+    <section class="card stats-card">
+      <h2>최근 7일 공부 기록</h2>
+      <canvas id="stats-chart" width="600" height="220"></canvas>
+    </section>
+
+  </main>
+</div>
+
+<audio id="beep-audio"></audio>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
