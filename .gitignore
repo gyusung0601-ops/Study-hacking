@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+study-immersion-tool/study.db
+.venv/
